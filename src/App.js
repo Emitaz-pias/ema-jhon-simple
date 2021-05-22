@@ -11,6 +11,7 @@ import {
 import Review from "./compornents/Review/Review";
 import Inventory from "./compornents/Review/inventory/Inventory";
 import NotFound from "./compornents/notFound/NotFound";
+import ProductDetails from "./compornents/productDetails/ProductDetails";
 
 function App() {
   return <div>
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route   path="/shop">
           <Shop></Shop>
+        </Route>
+        <Route path="/product/:productKey">
+          <ProductDetails></ProductDetails>
         </Route>
         <Route exact path="/">
           <Shop></Shop>
