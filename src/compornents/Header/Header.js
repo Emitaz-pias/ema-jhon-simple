@@ -12,6 +12,7 @@ const Header = () => {
         <Link to="/review">Review</Link>
         <Link to="/inventory">Manage Inventory</Link>
         <Link to="/">welcome :{loggedInUser.displayName}</Link>
+        <button onClick={()=>setLoggedInUser({})}>{loggedInUser.email? "Sign out":"sign in"}</button>
       </nav>
     
     </div>
