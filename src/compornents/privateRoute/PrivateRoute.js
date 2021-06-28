@@ -1,26 +1,27 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../App';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useContext } from "react";
+import { UserContext } from "../../App";
+import { Redirect, Route } from "react-router-dom";
 
-const PrivateRoute = ({children,...rest}) => {
-    const [loggedInUser] = useContext(UserContext);
-    return (
-        <Route
+const PrivateRoute = ({ children, ...rest }) => {
+  const [loggedInUser] = useContext(UserContext);
+  return (
+    <Route
       {...rest}
       render={({ location }) =>
-        loggedInUser.email? (
+        loggedInUser.email ? (
           children
         ) : (
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )
       }
     />
-    );
+  );
 };
 
 export default PrivateRoute;
+// for only commit
