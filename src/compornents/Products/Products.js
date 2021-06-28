@@ -5,8 +5,6 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const Products = (props) => {
   const { name, img, seller, price, stock, key } = props.product;
-  console.log(props.product)
-  
   const showAddToCart = props.showAddToCart;
 
   return (
@@ -23,7 +21,7 @@ const Products = (props) => {
         <small>
           <p>only{stock}left in stock-order soon</p>
         </small>
-        { showAddToCart && (
+        {showAddToCart && (
           <button
             onClick={() => props.handleAddProduct(props.product)}
             className="add-to-cart-btn"
