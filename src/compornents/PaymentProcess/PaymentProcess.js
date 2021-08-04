@@ -5,10 +5,10 @@ import CardElementProcessor from "./CardElementProcessor";
 
 const stripePromise = loadStripe("pk_test_iONwyHcRVWakZiYUQOPzcA8d00C5WkKbt2");
 
-const PaymentProcess = () => {
+const PaymentProcess = ({ placeOrder }) => {
   return (
     <Elements stripe={stripePromise}>
-      <CardElementProcessor />
+      <CardElementProcessor placeOrder={placeOrder} />
     </Elements>
   );
 };
