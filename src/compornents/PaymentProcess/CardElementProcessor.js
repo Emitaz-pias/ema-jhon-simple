@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const CardElementProcessor = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [paymentError, setPaymentError] = useState(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(null);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -27,19 +29,29 @@ const CardElementProcessor = () => {
     });
 
     if (error) {
-      console.log("[error]", error);
+      setPaymentError(error.message);
+      setPaymentSuccess(null);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      setPaymentSuccess(paymentMethod);
+      setPaymentError(null);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <CardElement />
+        <button type="submit" disabled={!stripe}>
+          Pay
+        </button>
+      </form>
+      {paymentError && <p style={{ color: "red" }}>{paymentError}</p>}
+      {paymentSuccess && (
+        <p style={{ color: "green" }}>
+          Congratulations! your payment is done successfully{" "}
+        </p>
+      )}
+    </div>
   );
 };
 
