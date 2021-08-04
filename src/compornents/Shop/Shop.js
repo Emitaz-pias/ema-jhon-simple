@@ -11,11 +11,15 @@ const Shop = () => {
   // const first10 = fakeData.slice(0, 10);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [search, setSearch] = useState("");
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
   useEffect(() => {
-    fetch("http://localhost:8080/products")
+    fetch(`http://localhost:8080/products?search=${search}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
-  }, []);
+  }, [search]);
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKyes = Object.keys(savedCart);
@@ -48,6 +52,12 @@ const Shop = () => {
   return (
     <div className="shop-container">
       <div className="product-container">
+        <input
+          type="text"
+          onBlur={handleSearch}
+          placeholder="search products"
+        />
+
         {products.map((product) => (
           <Products
             key={product.key}
